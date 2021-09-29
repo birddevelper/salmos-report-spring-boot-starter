@@ -1,0 +1,29 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+group 'io.github.io.github.birddevelper'
+version '1.0'
+
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.5.4'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+}
+
+test {
+    useJUnitPlatform()
+}
