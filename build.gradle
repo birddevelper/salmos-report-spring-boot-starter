@@ -3,9 +3,15 @@ plugins {
     id 'maven-publish'
 }
 
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
 group 'io.github.io.github.birddevelper'
 version '1.0'
 
+signing {
+    sign configurations.archives
+}
 
 configurations {
     compileOnly {
@@ -27,3 +33,4 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+

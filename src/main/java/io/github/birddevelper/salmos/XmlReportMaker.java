@@ -15,21 +15,21 @@ import java.util.regex.Pattern;
 @Getter
 @Setter
 @Configurable
-public class XmlReportMaker {
+public class XmlReportMaker extends ReportMaker{
 
 
-    JdbcQueryExcuter jdbcQueryExcuter;
-    String sqlQuery;
-    boolean summaryCommaSeperatedNumbers;
-    int summaryDecimalPrecision = 0;
+    //JdbcQueryExcuter jdbcQueryExcuter;
+    //String sqlQuery;
+    //boolean summaryCommaSeperatedNumbers;
+    //int summaryDecimalPrecision = 0;
     String rootElementName = "root";
     String childElementName = "child";
     XmlReportElementType xmlReportElementType = XmlReportElementType.RecordColumnAsElementChild;
     String newLine = "\n";
 
-    @Getter(value= AccessLevel.NONE)
-    @Setter(value= AccessLevel.NONE)
-    private HashMap<String, SummaryType> summaryColumns;
+    //@Getter(value= AccessLevel.NONE)
+    //@Setter(value= AccessLevel.NONE)
+    //private HashMap<String, SummaryType> summaryColumns;
 
     public XmlReportMaker(DataSource  datasource) {
         jdbcQueryExcuter = new JdbcQueryExcuter(datasource);
@@ -38,13 +38,6 @@ public class XmlReportMaker {
     }
 
 
-    public void addSummaryColumn(String columnName, SummaryType summaryType){
-        this.summaryColumns.put(columnName,summaryType);
-    }
-
-    public void removeSummaryColumn(String columnName){
-        this.summaryColumns.remove(columnName);
-    }
 
 
 
@@ -53,8 +46,6 @@ public class XmlReportMaker {
                 return generateXMLRecordColumnAsElementChild( );
         else
                 return generateXMLRecordColumnAsElementAttribute( );
-
-
         }
 
 
@@ -171,7 +162,6 @@ public class XmlReportMaker {
 
 
 
-
     private String generateXMLRecordColumnAsElementChild( ){
 
 
@@ -254,6 +244,7 @@ public class XmlReportMaker {
 
 
         }
+
         String sumAttr="";
         if(summaryColumns.size()>0) {
 
@@ -268,27 +259,11 @@ public class XmlReportMaker {
         xmlRoot += "</"+ rootElementName +">" + this.newLine ;
 
 
-
-
-
         return xmlRoot;
     }
 
 
-    private String roundOff(double val, int decimalPlace, boolean summaryCommaSeperatedNumbers)
-    {
-        return String.format("%"+(summaryCommaSeperatedNumbers ? ",": "")+"." + decimalPlace + "f", val);
-    }
 
-
-
-    private boolean isNumeric(String strNum) {
-        Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
-        if (strNum == null) {
-            return false;
-        }
-        return pattern.matcher(strNum).matches();
-    }
 
 
 }

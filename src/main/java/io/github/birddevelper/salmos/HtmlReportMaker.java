@@ -13,16 +13,17 @@ import java.util.regex.Pattern;
 
 @Getter
 @Setter
-public class HtmlReportMaker {
+public class HtmlReportMaker extends ReportMaker {
 
 
-    JdbcQueryExcuter jdbcQueryExcuter;
+    //JdbcQueryExcuter jdbcQueryExcuter;
 
 
     boolean rowIndexVisible;
-    @Getter(value=AccessLevel.NONE)
-    @Setter(value= AccessLevel.NONE)
-    private HashMap<String, SummaryType> summaryColumns;
+    //@Getter(value=AccessLevel.NONE)
+    //@Setter(value= AccessLevel.NONE)
+    //private HashMap<String, SummaryType> summaryColumns;
+
     String tableCssClass;
     boolean rightToLeft;
     String oddRowCssClass;
@@ -32,9 +33,9 @@ public class HtmlReportMaker {
     String footerRowCssClass;
     String title;
     String rowIndexHeader;
-    String sqlQuery;
-    boolean summaryCommaSeperatedNumbers;
-    int summaryDecimalPrecision = 0;
+    //String sqlQuery;
+    //boolean summaryCommaSeperatedNumbers;
+    //int summaryDecimalPrecision = 0;
 
 
     public HtmlReportMaker(DataSource  datasource) {
@@ -79,30 +80,26 @@ public class HtmlReportMaker {
 
 
     public String generate(){
-
-       return generateHTML(sqlQuery,rowIndexVisible, summaryColumns,  tableCssClass,  rightToLeft,  oddRowCssClass,  evenRowCssClass,
-               titleBarCssClass,  headerRowCssClass, title,  rowIndexHeader, footerRowCssClass );
-
+            return generateHTML();
         }
 
 
-    private String generateHTML(String sqlQuery , boolean rowIndexVisible, HashMap<String, SummaryType>  summaryColumns, String tableCssClass, boolean rightToLeft,
-                                String oddRowCssClass, String evenRowCssClass, String titleBarCssClass, String headerRowCssClass, String title, String rowIndexHeader, String footerRowCssClass ){
+    private String generateHTML(){
 
 
-        List<Map<String,Object>> rows =  jdbcQueryExcuter.getResultList(sqlQuery);
+        List<Map<String,Object>> rows =  jdbcQueryExcuter.getResultList(this.sqlQuery);
 
-        String table="<table dir='"  + (rightToLeft ? "rtl" : "ltr" ) + "'  class='"+ tableCssClass +"' >";
+        String table="<table dir='"  + (this.rightToLeft ? "rtl" : "ltr" ) + "'  class='"+ this.tableCssClass +"' >";
 
         boolean gotColumnName = false;
         Integer NumberOfcolumns = 0;
-        String headerofTable = (!title.equals("") ? "<tr><th colspan= ::colspan class='" + titleBarCssClass + "' > " + title + " </th></tr>" : "") + "<tr class='"+ headerRowCssClass + "'>" +   (rowIndexVisible ? "<th>" + rowIndexHeader + " </th>" : "" );
+        String headerofTable = (!this.title.equals("") ? "<tr><th colspan= ::colspan class='" + this.titleBarCssClass + "' > " + this.title + " </th></tr>" : "") + "<tr class='"+ this.headerRowCssClass + "'>" +   (this.rowIndexVisible ? "<th>" + this.rowIndexHeader + " </th>" : "" );
         String bodyOfTable = "";
         String footerOfTable = "";
         String[] columnsNames = null;
         HashMap<String,Double> summaryValue = new HashMap<>();
         int Index=0;
-        for(String column : summaryColumns.keySet())
+        for(String column : this.summaryColumns.keySet())
             summaryValue.put(column,0.0);
 
 
@@ -121,7 +118,7 @@ public class HtmlReportMaker {
                 while (column.hasNext()) {
 
                     String colName = column.next();
-                    System.out.println(colName);
+                    //System.out.println(colName);
                     headerofTable+= String.format("<th > %s %s", colName ,"</th>") ;
                 }
 
@@ -131,12 +128,12 @@ public class HtmlReportMaker {
                 columnsNames = new String[NumberOfcolumns];
                 columns.toArray(columnsNames);
 
-                headerofTable = headerofTable.replace("::colspan",  String.valueOf(NumberOfcolumns + (rowIndexVisible ? 1:0 )) );
+                headerofTable = headerofTable.replace("::colspan",  String.valueOf(NumberOfcolumns + (this.rowIndexVisible ? 1:0 )) );
                 table += headerofTable ;
             }
 
             /// Getting data and making row
-            String singleRow ="<tr class='" + (Index % 2 == 0 ? evenRowCssClass : oddRowCssClass)  + "'>" + (rowIndexVisible ? "<td>"+ String.valueOf(Index) + "</td>": "");
+            String singleRow ="<tr class='" + (Index % 2 == 0 ? this.evenRowCssClass : this.oddRowCssClass)  + "'>" + (this.rowIndexVisible ? "<td>"+ String.valueOf(Index) + "</td>": "");
 
             for(int i=0; i< NumberOfcolumns; i++ ){
 
@@ -150,7 +147,7 @@ public class HtmlReportMaker {
                 if(summaryValue.containsKey(ColumnName) && RawData!= null){
 
 
-                    switch(summaryColumns.get(ColumnName))
+                    switch(this.summaryColumns.get(ColumnName))
                     {
                         case SUM:
                             if(isNumeric(data.replace(",","")))
@@ -184,11 +181,11 @@ public class HtmlReportMaker {
 
         //double decimalPrecision = 10 ^ this.summaryDecimalPrecision;
 
-        if(summaryColumns.size()>0) {
-            footerOfTable = "<tr class='"+ footerRowCssClass +"' >"+   (rowIndexVisible ? "<td> </td>" : "" );
+        if(this.summaryColumns.size()>0) {
+            footerOfTable = "<tr class='"+ this.footerRowCssClass +"' >"+   (this.rowIndexVisible ? "<td> </td>" : "" );
             for (String column : columnsNames) {
                 if(summaryValue.containsKey(column))
-                    footerOfTable += "<th>" + roundOffTo2DecPlaces( summaryValue.get(column), this.summaryDecimalPrecision, this.summaryCommaSeperatedNumbers  ) + "</th>";
+                    footerOfTable += "<th>" + roundOff( summaryValue.get(column), this.summaryDecimalPrecision, this.summaryCommaSeperatedNumbers  ) + "</th>";
                 else
                     footerOfTable += "<th> - </th>";
             }
@@ -200,7 +197,7 @@ public class HtmlReportMaker {
     }
 
 
-    private String roundOffTo2DecPlaces(double val, int decimalPlace, boolean summaryCommaSeperatedNumbers)
+/*    private String roundOff(double val, int decimalPlace, boolean summaryCommaSeperatedNumbers)
     {
         return String.format("%"+(summaryCommaSeperatedNumbers ? ",": "")+"." + decimalPlace + "f", val);
     }
@@ -213,7 +210,7 @@ public class HtmlReportMaker {
             return false;
         }
         return pattern.matcher(strNum).matches();
-    }
+    }*/
 
 
 }
