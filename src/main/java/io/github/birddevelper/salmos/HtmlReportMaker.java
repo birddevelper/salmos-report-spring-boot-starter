@@ -13,17 +13,20 @@ import java.util.regex.Pattern;
 
 @Getter
 @Setter
+/**
+ *  A class that makes HTML table from records fetched by given sql query.
+ *
+ * @param dataSource jdbc data source that usually is configured in application.properties and can be autowired anywhere in application.
+ * @param sqlQuery SQL query to retrieve records from database
+ * @param title Optional Table title that will be shown on top of table
+ * @param rightToLeft Indicates the table direction, default value is false
+ * @param rowIndexVisible Indicates whether the table have index column or not, default value is false
+ * @param tableCssClass Optional table css class name
+ * @param oddRowCssClass Optional odd rows class name
+ */
 public class HtmlReportMaker extends ReportMaker {
 
-
-    //JdbcQueryExcuter jdbcQueryExcuter;
-
-
     boolean rowIndexVisible;
-    //@Getter(value=AccessLevel.NONE)
-    //@Setter(value= AccessLevel.NONE)
-    //private HashMap<String, SummaryType> summaryColumns;
-
     String tableCssClass;
     boolean rightToLeft;
     String oddRowCssClass;
@@ -33,9 +36,7 @@ public class HtmlReportMaker extends ReportMaker {
     String footerRowCssClass;
     String title;
     String rowIndexHeader;
-    //String sqlQuery;
-    //boolean summaryCommaSeperatedNumbers;
-    //int summaryDecimalPrecision = 0;
+
 
 
     public HtmlReportMaker(DataSource  datasource) {

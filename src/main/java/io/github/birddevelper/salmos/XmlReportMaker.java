@@ -127,15 +127,8 @@ public class XmlReportMaker extends ReportMaker{
             bodyXml+= childElement;
 
 
-
-
-
-
-
-
-
-
         }
+
         String sumAttr="";
         if(summaryColumns.size()>0) {
 
@@ -206,8 +199,6 @@ public class XmlReportMaker extends ReportMaker{
                 childElement += String.format("\t\t<%s>%s</%s>%s", ColumnName, data, ColumnName, this.newLine) ;
 
                 if(summaryValue.containsKey(ColumnName) && RawData!= null){
-
-
                     switch(summaryColumns.get(ColumnName))
                     {
                         case SUM:

@@ -2,10 +2,10 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>1.0.0</modelVersion>
-    <groupId>io.github.birdevelper</groupId>
+    <groupId>io.github.birddevelper</groupId>
     <artifactId>salmos-report-spring-boot-starter</artifactId>
     <version>1.0.0</version>
-    <name>${project.groupId}:${project.artifactId}</name>
+    <name>salmos-report-spring-boot-starter</name>
     <description>A useful simple to use spring-boot library that help you turn your SQL query into a beautiful html table or xml document with very specific features</description>
     <url>https://github.com/birddevelper/salmos-report-spring-boot-starter</url>
 
@@ -28,11 +28,11 @@
     <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
         <repository>
             <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2</url>
         </repository>
     </distributionManagement>
 

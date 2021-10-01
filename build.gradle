@@ -1,16 +1,30 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
+    id 'signing'
+
 }
 
-apply plugin: 'maven-publish'
-apply plugin: 'signing'
+
 
 group 'io.github.io.github.birddevelper'
 version '1.0'
 
-signing {
-    sign configurations.archives
+
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
 }
 
 configurations {
@@ -24,6 +38,7 @@ repositories {
 }
 
 dependencies {
+
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.5.4'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
@@ -33,4 +48,7 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+
+
 
