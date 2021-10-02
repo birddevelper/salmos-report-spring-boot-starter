@@ -141,8 +141,11 @@ public class ReportService {
         GeneralReportMaker irm = new GeneralReportMaker(dataSource);
         // load template from file located in resources 
         irm.loadTemplateBodyFromFile("templates/salmosTemplates/template1.html");
+
+        // set the query retrieving data from database
         irm.setSqlQuery("select fullname as 'Name', age as 'Age', salary as 'Salary'   from chamber limit 0,10");
 
+        // specify columns of data that must be summarized 
         xrm.addSummaryColumn("Age", SummaryType.AVERAGE);
         xrm.addSummaryColumn("Salary", SummaryType.SUM);
 
