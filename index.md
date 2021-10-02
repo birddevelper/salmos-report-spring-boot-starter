@@ -1,4 +1,4 @@
-## What is Salmos Report?
+## Salmos Report
 
 
 
