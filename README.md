@@ -39,6 +39,7 @@ import io.github.birddevelper.salmos.HtmlReportMaker;
 import io.github.birddevelper.salmos.setting.HtmlReportTemplate;
 import io.github.birddevelper.salmos.setting.SummaryType;
 
+
 @Service
 public class ReportService {
 
@@ -49,7 +50,7 @@ public class ReportService {
 
         // Creating instance of HtmlReportMaker
         HtmlReportMaker hrm = new HtmlReportMaker(dataSource);
-        // specify which columns of data must be summarized in table footer row
+        // specify columns of data that must be summarized in table footer row
         hrm.addSummaryColumn("Age", SummaryType.AVERAGE);
         hrm.addSummaryColumn("Salary", SummaryType.SUM);
         
@@ -80,6 +81,77 @@ public class ReportService {
         return hrm.generate();
 
       
+
+    }
+}
+```
+
+
+### XmlReportMaker Sample Code
+
+```java
+import io.github.birddevelper.salmos.XmlReportMaker;
+import io.github.birddevelper.salmos.setting.SummaryType;
+import io.github.birddevelper.salmos.setting.XmlReportElementType;
+@Service
+public class ReportService {
+
+    @Autowired
+    DataSource dataSource;
+
+    public String generateXMLReport() {
+        // Creating instance of XmlReportMaker
+        XmlReportMaker xrm = new XmlReportMaker(dataSource);
+
+        // specify columns of data that must be summarized (they will put in root element as attribute) 
+        xrm.addSummaryColumn("Age", SummaryType.AVERAGE);
+        xrm.addSummaryColumn("Salary", SummaryType.SUM);
+
+        // summary section numbers decimal point setting
+        xrm.setSummaryDecimalPrecision(0);
+        
+        xrm.setRootElementName("Persons");
+        xrm.setChildElementName("person");
+        
+        xrm.setXmlReportElementType(XmlReportElementType.RecordColumnAsElementAttribute);
+        
+        // set the query retrieving data from database
+        xrm.setSqlQuery("select fullname as 'Name', age as 'Age', salary as 'Salary'   from chamber limit 0,10");
+        
+        return xrm.generate();
+    }
+}
+```
+
+
+### GeneralReportMaker Sample code
+
+```java
+import org.log.carvan.utils.GeneralReportMaker;
+import io.github.birddevelper.salmos.setting.SummaryType;
+
+@Service
+public class ReportService {
+
+    @Autowired
+    DataSource dataSource;
+
+    public String generateUniversalReport() {
+
+        GeneralReportMaker irm = new GeneralReportMaker(dataSource);
+        // load template from file located in resources 
+        irm.loadTemplateBodyFromFile("templates/salmosTemplates/template1.html");
+        irm.setSqlQuery("select fullname as 'Name', age as 'Age', salary as 'Salary'   from chamber limit 0,10");
+
+        xrm.addSummaryColumn("Age", SummaryType.AVERAGE);
+        xrm.addSummaryColumn("Salary", SummaryType.SUM);
+
+        // set footer template with String (to have a column summary in footer, you should use ::[column name]Summary in template 
+        irm.setTemplateFooter("<p ><b> CityCount >> ::AgeSummary ---- Capacity Average >> ::SalarySummary </b> </p>");
+
+        
+        return irm.generate();
+
 
     }
 }
