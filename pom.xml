@@ -4,8 +4,8 @@
     <modelVersion>1.0.0</modelVersion>
     <groupId>io.github.birddevelper</groupId>
     <artifactId>salmos-report-spring-boot-starter</artifactId>
-    <version>1.0.0</version>
-    <name>salmos-report-spring-boot-starter</name>
+    <version>1.1.0</version>
+    <name>Salmos Report</name>
     <description>A useful simple to use spring-boot library that help you turn your SQL query into a beautiful html table or xml document with very specific features</description>
     <url>https://github.com/birddevelper/salmos-report-spring-boot-starter</url>
 
@@ -20,7 +20,7 @@
 <developer>
     <id>mostafashaeritj</id>
     <name>Mostafa Shaeri</name>
-    <email>mostafa.shaeri.tj@gmail.com</email>
+    <email></email>
 </developer>
 </developers>
 
