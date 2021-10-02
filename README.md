@@ -87,7 +87,7 @@ public class ReportService {
 ```
 
 
-### XmlReportMaker Sample Code
+#### XmlReportMaker Sample Code
 
 ```java
 import io.github.birddevelper.salmos.XmlReportMaker;
@@ -124,7 +124,7 @@ public class ReportService {
 ```
 
 
-### GeneralReportMaker Sample code
+#### GeneralReportMaker Sample code
 
 ```java
 import org.log.carvan.utils.GeneralReportMaker;
