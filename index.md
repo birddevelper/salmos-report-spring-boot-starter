@@ -1,8 +1,9 @@
-## Welcome to GitHub Pages
+## What is Salmos Report?
 
-You can use the [editor on GitHub](https://github.com/birddevelper/salmos-report-spring-boot-starter/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+
+Reports are essential part of any Enterprise Application , however can be most frustrating part of development. Along with Report’s title, columns' header, report direction, fonts and etc, most of reports contain numerical information that should be aggregated in the header/footer section of the reports. Moreover, Some times we do need to export data in diffrent structure or format such as XML, Json. Here we do it for you!
+
 
 ### Markdown
 
