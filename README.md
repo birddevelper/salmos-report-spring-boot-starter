@@ -113,6 +113,7 @@ public class ReportService {
         xrm.setRootElementName("Persons");
         xrm.setChildElementName("person");
         
+        // this line set the generator to put row data in attributes of row element
         xrm.setXmlReportElementType(XmlReportElementType.RecordColumnAsElementAttribute);
         
         // set the query retrieving data from database
