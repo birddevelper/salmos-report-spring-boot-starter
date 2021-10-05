@@ -2,7 +2,7 @@ What is SalmosReport
 ======
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.birddevelper/salmos-report-spring-boot-starter.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22io.github.birddevelper%22%20AND%20a:%22salmos-report-spring-boot-starter%22)
 
-SalmosReport is a spring boot plugin that helps you turn your SQL query into a beautiful html table, xml document or any other format you wish with very specific features. Until now, it can produce Html, xml and custom format report (just as string, not file ).
+SalmosReport is a spring boot plugin that helps you turn your SQL query result into a beautiful html table, xml document or any other format you wish with very specific features. Until now, it can produce Html, xml and custom format report (just as string, not file ).
 
 ### Getting started
 
@@ -87,6 +87,8 @@ public class ReportService {
 ```
 
 
+
+
 #### XmlReportMaker Sample Code
 
 ```java
@@ -123,6 +125,10 @@ public class ReportService {
     }
 }
 ```
+
+
+
+
 
 
 #### GeneralReportMaker Sample code
