@@ -18,18 +18,12 @@ import java.util.regex.Pattern;
 public class XmlReportMaker extends ReportMaker{
 
 
-    //JdbcQueryExcuter jdbcQueryExcuter;
-    //String sqlQuery;
-    //boolean summaryCommaSeperatedNumbers;
-    //int summaryDecimalPrecision = 0;
+
     String rootElementName = "root";
     String childElementName = "child";
     XmlReportElementType xmlReportElementType = XmlReportElementType.RecordColumnAsElementChild;
     String newLine = "\n";
 
-    //@Getter(value= AccessLevel.NONE)
-    //@Setter(value= AccessLevel.NONE)
-    //private HashMap<String, SummaryType> summaryColumns;
 
     public XmlReportMaker(DataSource  datasource) {
         jdbcQueryExcuter = new JdbcQueryExcuter(datasource);

@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 @Getter
 @Setter
 /**
- *  A class that makes HTML table from records fetched by given sql query.
+ *  A class that makes HTML table from records retrieved by given sql query.
  *
  * @param dataSource jdbc data source that usually is configured in application.properties and can be autowired anywhere in application.
  * @param sqlQuery SQL query to retrieve records from database
@@ -53,7 +53,6 @@ public class HtmlReportMaker extends ReportMaker {
         this.footerRowCssClass = "";
         this.title="";
         this.summaryCommaSeperatedNumbers = false;
-        //jdbcQueryExcuter = new JDBCQueryExcuter();
     }
 
     public void setTemplate(HtmlReportTemplate template){
@@ -108,7 +107,7 @@ public class HtmlReportMaker extends ReportMaker {
         for(Map<String,Object> row:rows){
             Index++;
 
-            //String tableRow = "<tr>" +   (rowIndex ? "<th> </th>" : "" );
+
 
             /// Get the Columns name from first row
             if(!gotColumnName) {
@@ -178,9 +177,7 @@ public class HtmlReportMaker extends ReportMaker {
 
         table+=bodyOfTable;
 
-        //System.out.println("table " + table);
 
-        //double decimalPrecision = 10 ^ this.summaryDecimalPrecision;
 
         if(this.summaryColumns.size()>0) {
             footerOfTable = "<tr class='"+ this.footerRowCssClass +"' >"+   (this.rowIndexVisible ? "<td> </td>" : "" );
@@ -198,20 +195,6 @@ public class HtmlReportMaker extends ReportMaker {
     }
 
 
-/*    private String roundOff(double val, int decimalPlace, boolean summaryCommaSeperatedNumbers)
-    {
-        return String.format("%"+(summaryCommaSeperatedNumbers ? ",": "")+"." + decimalPlace + "f", val);
-    }
-
-
-
-    private boolean isNumeric(String strNum) {
-        Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
-        if (strNum == null) {
-            return false;
-        }
-        return pattern.matcher(strNum).matches();
-    }*/
 
 
 }
