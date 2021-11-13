@@ -170,4 +170,15 @@ public class ReportService {
 [Read More at Medium.com ](https://medium.com/javarevisited/with-salmos-report-in-spring-boot-generate-reports-in-few-lines-of-code-b5212486b921)
 
 
+
+###Change Logs :
+
+1.2.0 : export to PDF and TEXT files added. 
+
+1.1.0 : GeneralReportMaker class added.
+
+1.0.0 : first release.
+
+
+
 Project Contributors : [Mostafa Shaeri](https://m-shaeri.ir/blog/with-salmos-report-generate-reports-in-any-format-you-need/)
