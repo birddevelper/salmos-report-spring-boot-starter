@@ -43,6 +43,11 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
+    implementation 'org.xhtmlrenderer:flying-saucer-pdf:9.1.22'
+    implementation 'gui.ava:html2image:0.9'
+    implementation 'org.jsoup:jsoup:1.14.2'
+
+
 }
 
 test {

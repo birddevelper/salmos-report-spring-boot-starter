@@ -4,11 +4,14 @@ import io.github.birddevelper.salmos.db.JdbcQueryExcuter;
 import io.github.birddevelper.salmos.setting.SummaryType;
 import lombok.Getter;
 import lombok.Setter;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.xhtmlrenderer.layout.SharedContext;
+import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import javax.sql.DataSource;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.nio.charset.Charset;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -29,6 +32,73 @@ public class GeneralReportMaker extends ReportMaker {
     public String generate() {
         return mixTemplateWithData();
     }
+
+    @Override
+    public File generateFile(String filePathName) throws IOException {
+        File file = new File(filePathName);
+        FileOutputStream outputStream = new FileOutputStream(file);
+        String fileContent =  mixTemplateWithData();
+        outputStream.write(fileContent.getBytes(Charset.forName("UTF-8")));
+        return file;
+    }
+
+    public File generatePDF(String filePathName,String[] fonts, String baseUri, boolean printable, boolean interactable) throws IOException {
+         Document doc = Jsoup.parse(mixTemplateWithData(),baseUri);
+         doc.outputSettings().syntax(Document.OutputSettings.Syntax.html);
+         File file = new File(filePathName);
+         try(OutputStream outputStream = new FileOutputStream(file)){
+             ITextRenderer renderer = new ITextRenderer();
+             SharedContext sharedContext = renderer.getSharedContext();
+             if(fonts!=null){
+                 for(String font:fonts){
+                     renderer.getFontResolver().addFont(font,true);
+                 }
+             }
+             sharedContext.setPrint(printable);
+             sharedContext.setInteractive(interactable);
+             String fileContent =  mixTemplateWithData();
+             renderer.setDocumentFromString(fileContent,baseUri);
+             renderer.layout();
+             renderer.createPDF(outputStream);
+             return file;
+         }
+         catch(Exception e){
+             System.out.println("generate PDF error : "+ e.getMessage());
+             return null;
+
+         }
+
+
+    }
+
+    public File generatePDF(String filePathName,String[] fonts, String baseUri) throws IOException {
+        Document doc = Jsoup.parse(mixTemplateWithData(),baseUri);
+        doc.outputSettings().syntax(Document.OutputSettings.Syntax.html);
+        File file = new File(filePathName);
+        try(OutputStream outputStream = new FileOutputStream(file)){
+            ITextRenderer renderer = new ITextRenderer();
+            SharedContext sharedContext = renderer.getSharedContext();
+            if(fonts!=null){
+                for(String font:fonts){
+                    renderer.getFontResolver().addFont(font,true);
+                }
+            }
+            sharedContext.setPrint(true);
+            sharedContext.setInteractive(true);
+            String fileContent =  mixTemplateWithData();
+            renderer.setDocumentFromString(fileContent,baseUri);
+            renderer.layout();
+            renderer.createPDF(outputStream);
+            return file;
+        }
+        catch(Exception e){
+            System.out.println("generate PDF error : "+ e.getMessage());
+            return null;
+        }
+
+    }
+
+
 
     public GeneralReportMaker(DataSource datasource) {
         summaryColumns = new HashMap<String, SummaryType>();
@@ -212,6 +282,8 @@ public class GeneralReportMaker extends ReportMaker {
         ClassLoader classLoader = this.getClass().getClassLoader();
         return classLoader.getResourceAsStream(fileName);
     }
+
+
 
 
 }

@@ -6,6 +6,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
@@ -50,5 +52,7 @@ public abstract class ReportMaker {
     }
 
     abstract public String generate();
+
+    abstract public File generateFile(String filePathName) throws IOException;
 
 }

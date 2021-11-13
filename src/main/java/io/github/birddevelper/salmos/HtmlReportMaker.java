@@ -6,8 +6,17 @@ import io.github.birddevelper.salmos.db.JdbcQueryExcuter;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.xhtmlrenderer.layout.SharedContext;
+import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import javax.sql.DataSource;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.charset.Charset;
 import java.util.*;
 
 
@@ -83,14 +92,78 @@ public class HtmlReportMaker extends ReportMaker {
             return generateHTML();
         }
 
+    @Override
+    public File generateFile(String filePathName) throws IOException {
+        File file = new File(filePathName);
+        FileOutputStream outputStream = new FileOutputStream(file);
+        String fileContent =  generateHTML();
+        outputStream.write(fileContent.getBytes(Charset.forName("UTF-8")));
+        return file;
+    }
+
+    public File generatePDF(String filePathName,String[] fonts, String baseUri, boolean printable, boolean interactable) throws IOException {
+        Document doc = Jsoup.parse(generateHTML(),baseUri);
+        doc.outputSettings().syntax(Document.OutputSettings.Syntax.html);
+        File file = new File(filePathName);
+        try(OutputStream outputStream = new FileOutputStream(file)){
+            ITextRenderer renderer = new ITextRenderer();
+            SharedContext sharedContext = renderer.getSharedContext();
+            if(fonts!=null){
+                for(String font:fonts){
+                    renderer.getFontResolver().addFont(font,true);
+                }
+            }
+            sharedContext.setPrint(printable);
+            sharedContext.setInteractive(interactable);
+            String fileContent =  doc.html();
+            renderer.setDocumentFromString(fileContent,baseUri);
+            renderer.layout();
+            renderer.createPDF(outputStream);
+            return file;
+        }
+        catch(Exception e){
+            System.out.println("generate PDF error : "+ e.getMessage());
+            return null;
+
+        }
+
+
+    }
+
+    public File generatePDF(String filePathName,String[] fonts, String baseUri) throws IOException {
+        Document doc = Jsoup.parse(generateHTML(),baseUri);
+        doc.outputSettings().syntax(Document.OutputSettings.Syntax.html);
+        File file = new File(filePathName);
+        try(OutputStream outputStream = new FileOutputStream(file)){
+            ITextRenderer renderer = new ITextRenderer();
+            SharedContext sharedContext = renderer.getSharedContext();
+            if(fonts!=null){
+                for(String font:fonts){
+                    renderer.getFontResolver().addFont(font,true);
+                }
+            }
+            sharedContext.setPrint(true);
+            sharedContext.setInteractive(true);
+            String fileContent =  doc.html();
+            renderer.setDocumentFromString(fileContent,baseUri);
+            renderer.layout();
+            renderer.createPDF(outputStream);
+            return file;
+        }
+        catch(Exception e){
+            System.out.println("generate PDF error : "+ e.getMessage());
+            return null;
+        }
+
+    }
+
+
 
     private String generateHTML(){
 
 
         List<Map<String,Object>> rows =  jdbcQueryExcuter.getResultList(this.sqlQuery);
-
         String table="<table dir='"  + (this.rightToLeft ? "rtl" : "ltr" ) + "'  class='"+ this.tableCssClass +"' >";
-
         boolean gotColumnName = false;
         Integer NumberOfcolumns = 0;
         String headerofTable = (!this.title.equals("") ? "<tr><th colspan= ::colspan class='" + this.titleBarCssClass + "' > " + this.title + " </th></tr>" : "") + "<tr class='"+ this.headerRowCssClass + "'>" +   (this.rowIndexVisible ? "<th>" + this.rowIndexHeader + " </th>" : "" );

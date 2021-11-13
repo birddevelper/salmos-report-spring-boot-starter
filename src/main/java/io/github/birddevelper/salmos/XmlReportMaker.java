@@ -9,6 +9,10 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Configurable;
 
 import javax.sql.DataSource;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.*;
 
 
@@ -35,6 +39,7 @@ public class XmlReportMaker extends ReportMaker{
 
 
 
+
     public String generate(){
         if(xmlReportElementType == XmlReportElementType.RecordColumnAsElementChild)
                 return generateXMLRecordColumnAsElementChild( );
@@ -43,7 +48,14 @@ public class XmlReportMaker extends ReportMaker{
         }
 
 
-
+    @Override
+    public File generateFile(String filePathName) throws IOException {
+        File file = new File(filePathName);
+        FileOutputStream outputStream = new FileOutputStream(file);
+        String fileContent =  generate();
+        outputStream.write(fileContent.getBytes(Charset.forName("UTF-8")));
+        return file;
+    }
 
 
 
