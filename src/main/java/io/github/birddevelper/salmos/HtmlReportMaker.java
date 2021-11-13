@@ -176,7 +176,6 @@ public class HtmlReportMaker extends ReportMaker {
             summaryValue.put(column,0.0);
 
 
-
         for(Map<String,Object> row:rows){
             Index++;
 
@@ -243,7 +242,6 @@ public class HtmlReportMaker extends ReportMaker {
             }
 
             bodyOfTable+= singleRow + "</tr>";
-
 
 
         }
