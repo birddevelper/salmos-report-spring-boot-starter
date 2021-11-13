@@ -145,26 +145,29 @@ public class ReportService {
 
     public String generateUniversalReport() {
 
-        GeneralReportMaker irm = new GeneralReportMaker(dataSource);
+        GeneralReportMaker grm = new GeneralReportMaker(dataSource);
         // load template from file located in resources 
-        irm.loadTemplateBodyFromFile("templates/salmosTemplates/template1.html");
+        grm.loadTemplateBodyFromFile("templates/salmosTemplates/template1.html");
 
         // set the query retrieving data from database
-        irm.setSqlQuery("select fullname as 'Name', age as 'Age', salary as 'Salary'   from chamber limit 0,10");
+        grm.setSqlQuery("select fullname as 'Name', age as 'Age', salary as 'Salary'   from chamber limit 0,10");
 
         // specify columns of data that must be summarized 
-        xrm.addSummaryColumn("Age", SummaryType.AVERAGE);
-        xrm.addSummaryColumn("Salary", SummaryType.SUM);
+        grm.addSummaryColumn("Age", SummaryType.AVERAGE);
+        grm.addSummaryColumn("Salary", SummaryType.SUM);
 
         // set footer template with String (to have a column summary in footer, you should use ::[column name]Summary in template 
-        irm.setTemplateFooter("<p ><b> CityCount >> ::AgeSummary ---- Capacity Average >> ::SalarySummary </b> </p>");
+        grm.setTemplateFooter("<p ><b> CityCount >> ::AgeSummary ---- Capacity Average >> ::SalarySummary </b> </p>");
 
         
-        return irm.generate();
+        return grm.generate();
 
 
     }
 }
 ```
+
+[Read More at Medium.com ](https://medium.com/javarevisited/with-salmos-report-in-spring-boot-generate-reports-in-few-lines-of-code-b5212486b921)
+
 
 Project Contributors : [Mostafa Shaeri](https://m-shaeri.ir/blog/with-salmos-report-generate-reports-in-any-format-you-need/)
