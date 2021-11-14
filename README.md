@@ -160,8 +160,52 @@ public class ReportService {
         grm.setTemplateFooter("<p ><b> CityCount >> ::AgeSummary ---- Capacity Average >> ::SalarySummary </b> </p>");
 
         
-        return grm.generate();
+        return grm.generate();  // return String containing the produced report
 
+
+    }
+}
+```
+
+### Generate PDF report 
+```java
+import io.github.birddevelper.salmos.HtmlReportMaker;
+import io.github.birddevelper.salmos.setting.HtmlReportTemplate;
+import io.github.birddevelper.salmos.setting.SummaryType;
+
+
+@Service
+public class ReportService {
+
+    @Autowired
+    DataSource dataSource;
+
+    public String generateReport() {
+
+        // Creating instance of HtmlReportMaker
+        HtmlReportMaker hrm = new HtmlReportMaker(dataSource);
+        // specify columns of data that must be summarized in table footer row
+        hrm.addSummaryColumn("Age", SummaryType.AVERAGE);
+        hrm.addSummaryColumn("Salary", SummaryType.SUM);
+        
+        
+        //  summary section numbers decimal point setting
+        hrm.setSummaryDecimalPrecision(1);
+        
+        //  summary section numbers seperated by comma 
+        hrm.setSummaryCommaSeperatedNumbers(true);
+        
+        // show  row's index
+        hrm.isRowIndexVisible(true);
+        
+        //sql query to retrieve data rows
+        String sql = "select fullname as 'Name', age as 'Age', salary as 'Salary'   from chamber limit 0,10";
+        // set the query retrieving data from database
+        hrm.setSqlQuery(sql);
+        
+        return hrm.generatePDF();
+
+      
 
     }
 }
