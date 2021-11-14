@@ -180,7 +180,7 @@ public class ReportService {
     @Autowired
     DataSource dataSource;
 
-    public String generateReport() {
+    public File generatePDFReport() {
 
         // Creating instance of HtmlReportMaker
         HtmlReportMaker hrm = new HtmlReportMaker(dataSource);
@@ -202,8 +202,10 @@ public class ReportService {
         String sql = "select fullname as 'Name', age as 'Age', salary as 'Salary'   from chamber limit 0,10";
         // set the query retrieving data from database
         hrm.setSqlQuery(sql);
+        String[] fonts = {"fonts/ArialBold.ttf", "fonts/MyOtherFont.ttf"}; // path to fonts that you want embed in pdf document 
+        String baseUri = "the base uri";
         
-        return hrm.generatePDF();
+        return hrm.generatePDF("D:/mypdf.pdf",fonts,baseUri);
 
       
 
