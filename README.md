@@ -171,13 +171,18 @@ public class ReportService {
 
 
 
-#### Change Logs :
+### Change Logs :
 
-1.2.0 : export to PDF and TEXT files added. 
+1.2.0 :
+- Export to PDF and TEXT files added. 
 
-1.1.0 : GeneralReportMaker class added.
+1.1.0 :
 
-1.0.0 : first release.
+- GeneralReportMaker class added.
+- Bugs fixed.
+
+1.0.0 : 
+- First release.
 
 
 
