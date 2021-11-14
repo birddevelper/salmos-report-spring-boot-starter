@@ -7,11 +7,11 @@ SalmosReport is a spring boot plugin that helps you turn your SQL query result i
 ### Getting started
 
 
-Current Version of the this plugin is 1.1.0
+Current Version of the this plugin is 1.2.0
 
 Gradle :
 ```shell
-implementation 'io.github.birddevelper:salmos-report-spring-boot-starter:1.1.0'
+implementation 'io.github.birddevelper:salmos-report-spring-boot-starter:1.2.0'
 ```
 
 
@@ -20,7 +20,7 @@ Maven :
 <dependency>
   <groupId>io.github.birddevelper</groupId>
   <artifactId>salmos-report-spring-boot-starter</artifactId>
-  <version>1.1.0</version>
+  <version>1.2.0</version>
 </dependency>
 ```
 

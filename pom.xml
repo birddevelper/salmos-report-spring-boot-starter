@@ -1,28 +1,28 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>1.0.0</modelVersion>
+    <modelVersion>1.2.0</modelVersion>
     <groupId>io.github.birddevelper</groupId>
     <artifactId>salmos-report-spring-boot-starter</artifactId>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
     <name>Salmos Report</name>
-    <description>A useful simple to use spring-boot library that help you turn your SQL query into a beautiful html table or xml document with very specific features</description>
+    <description>A useful simple to use spring-boot library that turns your SQL query into a beautiful html table, xml document or pdf document with very specific features</description>
     <url>https://github.com/birddevelper/salmos-report-spring-boot-starter</url>
 
-<licenses>
-    <license>
-        <name>The Apache License, Version 2.0</name>
-        <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-    </license>
-</licenses>
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
 
-<developers>
-<developer>
-    <id>mostafashaeritj</id>
-    <name>Mostafa Shaeri</name>
-    <email></email>
-</developer>
-</developers>
+    <developers>
+        <developer>
+            <id>mostafashaeritj</id>
+            <name>Mostafa Shaeri</name>
+            <email></email>
+        </developer>
+    </developers>
 
 
     <distributionManagement>
@@ -38,10 +38,10 @@
 
 
 
-<scm>
-<connection>scm:git:git@github.com:birddevelper/salmos-report-spring-boot-starter.git</connection>
-<developerConnection>scm:git:ssh://github.com:birddevelper/salmos-report-spring-boot-starter.git</developerConnection>
-<url>https://github.com/birddevelper/salmos-report-spring-boot-starter/tree/master</url>
-</scm>
+    <scm>
+        <connection>scm:git:git@github.com:birddevelper/salmos-report-spring-boot-starter.git</connection>
+        <developerConnection>scm:git:ssh://github.com:birddevelper/salmos-report-spring-boot-starter.git</developerConnection>
+        <url>https://github.com/birddevelper/salmos-report-spring-boot-starter/tree/master</url>
+    </scm>
 
 </project>
