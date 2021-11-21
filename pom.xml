@@ -1,12 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>1.2.0</modelVersion>
+    <modelVersion>2.0.0</modelVersion>
     <groupId>io.github.birddevelper</groupId>
     <artifactId>salmos-report-spring-boot-starter</artifactId>
-    <version>1.2.0</version>
+    <version>2.0.0</version>
     <name>Salmos Report</name>
-    <description>A useful simple to use spring-boot library that turns your SQL query into a beautiful html table, xml document or pdf document with very specific features</description>
+    <description>
+        SalmosReport is a spring boot library that helps make beautiful html table, xml document, pdf document or any other format you wish from SQL query or Arrays and Lists. Until now, it can produce Html, xml, pdf document and custom format report .
+    </description>
     <url>https://github.com/birddevelper/salmos-report-spring-boot-starter</url>
 
     <licenses>
@@ -18,7 +20,7 @@
 
     <developers>
         <developer>
-            <id>mostafashaeritj</id>
+            <id></id>
             <name>Mostafa Shaeri</name>
             <email></email>
         </developer>
