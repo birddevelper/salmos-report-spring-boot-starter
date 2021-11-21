@@ -158,6 +158,65 @@ public class GeneralReportMaker extends ReportMaker {
     }
 
 
+    ////// Constructors with List of Objects
+    public GeneralReportMaker(ObjectFactory objectFactory) {
+        summaryColumns = new HashMap<String, SummaryType>();
+        this.objectFactory = objectFactory;
+    }
+
+    public GeneralReportMaker(ObjectFactory objectFactory, String templateBody) {
+        this.objectFactory = objectFactory;
+        summaryColumns = new HashMap<String,SummaryType>();
+        this.sqlQuery = sqlQuery;
+        this.templateBody = templateBody;
+    }
+
+    public GeneralReportMaker(ObjectFactory objectFactory, String templateBody, String templateHeader, String templateFooter) {
+        this.objectFactory = objectFactory;
+        summaryColumns = new HashMap<String,SummaryType>();
+        this.sqlQuery = sqlQuery;
+        this.templateBody = templateBody;
+    }
+
+    public GeneralReportMaker(ObjectFactory objectFactory, InputStream templateBodyInputStream) {
+        this.objectFactory = objectFactory;
+        summaryColumns = new HashMap<String, SummaryType>();
+        this.sqlQuery = sqlQuery;
+        this.templateBody = getStringFromInputStream(templateBodyInputStream);
+
+    }
+
+    public GeneralReportMaker(ObjectFactory objectFactory, InputStream templateBodyInputStream, InputStream templateHeaderInputStream, InputStream templateFooterInputStream  ) {
+        this.objectFactory = objectFactory;
+        summaryColumns = new HashMap<String, SummaryType>();
+        this.sqlQuery = sqlQuery;
+        this.templateBody = getStringFromInputStream(templateBodyInputStream);
+        this.templateHeader = getStringFromInputStream(templateHeaderInputStream);
+        this.templateFooter = getStringFromInputStream(templateFooterInputStream);
+
+    }
+
+    public GeneralReportMaker(ObjectFactory objectFactory, String templateFilePath, String itemSeparator) {
+        this.objectFactory = objectFactory;
+        summaryColumns = new HashMap<String, SummaryType>();
+        this.sqlQuery = sqlQuery;
+        this.templateBody = getResourceFileAsString(templateFilePath);
+        this.itemSeparator = itemSeparator;
+
+    }
+
+    public GeneralReportMaker(ObjectFactory objectFactory, String templateBodyFilePath, String templateHeaderFilePath, String templateFooterFilePath, String itemSeparator) {
+        this.objectFactory = objectFactory;
+        summaryColumns = new HashMap<String, SummaryType>();
+        this.sqlQuery = sqlQuery;
+        this.templateBody = getResourceFileAsString(templateBodyFilePath);
+        this.templateHeader = getResourceFileAsString(templateHeaderFilePath);
+        this.templateFooter = getResourceFileAsString(templateFooterFilePath);
+        this.itemSeparator = itemSeparator;
+
+    }
+
+
 
     public void loadTemplateBodyFromFile(String templateBodyFilePath){
 
@@ -178,7 +237,22 @@ public class GeneralReportMaker extends ReportMaker {
 
     private String mixTemplateWithData() {
 
-        List<Map<String, Object>> rows = jdbcQueryExcuter.getResultList(this.sqlQuery);
+        List<Map<String,Object>> rows=null;
+
+        if(this.objectFactory!=null){
+            if(objectFactory.getListOfObjects()!=null )
+                rows = objectFactory.getListOfObjects();
+            else
+                throw new IllegalArgumentException("Please load objects list in objectFactory before making report");
+        }
+        else if(this.sqlQuery!=null && this.sqlQuery.length()>0) {
+            rows = jdbcQueryExcuter.getResultList(this.sqlQuery);
+        }
+        else {
+            throw new IllegalArgumentException("Neither Objects List Nor Sql query is given to report maker.");
+        }
+
+
         String output = "";
         int Index=0;
         boolean gotColumnName = false;
@@ -193,7 +267,7 @@ public class GeneralReportMaker extends ReportMaker {
         for(Map<String,Object> row:rows){
             String tempTemplate = this.templateBody;
             Index++;
-            System.out.println("hi2");
+
             if(!gotColumnName) {
                 Set<String> columns  =  row.keySet();
                 Iterator<String> column = columns.iterator();

@@ -9,7 +9,11 @@ import lombok.Setter;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Getter
 @Setter
@@ -17,7 +21,12 @@ public abstract class ReportMaker {
 
     protected boolean summaryCommaSeperatedNumbers = false;
     protected int summaryDecimalPrecision = 0;
+
+    @Setter(value= AccessLevel.NONE)
     protected String sqlQuery;
+
+    protected ObjectFactory objectFactory;
+
 
     @Getter(value= AccessLevel.NONE)
     @Setter(value= AccessLevel.NONE)
@@ -27,6 +36,12 @@ public abstract class ReportMaker {
     @Setter(value= AccessLevel.NONE)
     protected JdbcQueryExcuter jdbcQueryExcuter;
 
+
+    public void setSqlQuery(String sqlQuery){
+        if(objectFactory!=null)
+            throw new IllegalStateException("You can not set sql query when you built your report maker with ObjectFactory.");
+        this.sqlQuery = sqlQuery;
+    }
 
     public void addSummaryColumn(String columnName, SummaryType summaryType){
         this.summaryColumns.put(columnName,summaryType);

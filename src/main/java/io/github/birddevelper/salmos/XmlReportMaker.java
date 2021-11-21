@@ -35,6 +35,11 @@ public class XmlReportMaker extends ReportMaker{
 
     }
 
+    public XmlReportMaker(ObjectFactory objectFactory) {
+        this.objectFactory = objectFactory;
+        summaryColumns = new HashMap<String, SummaryType>();
+
+    }
 
 
 
@@ -163,8 +168,21 @@ public class XmlReportMaker extends ReportMaker{
 
     private String generateXMLRecordColumnAsElementChild( ){
 
+        List<Map<String,Object>> rows=null;
 
-        List<Map<String,Object>> rows =  jdbcQueryExcuter.getResultList(this.sqlQuery);
+        if(this.objectFactory!=null){
+            if(objectFactory.getListOfObjects()!=null )
+                rows = objectFactory.getListOfObjects();
+            else
+                throw new IllegalArgumentException("Please load objects list in objectFactory before making report");
+        }
+        else if(this.sqlQuery!=null && this.sqlQuery.length()>0) {
+            rows = jdbcQueryExcuter.getResultList(this.sqlQuery);
+        }
+        else {
+            throw new IllegalArgumentException("Neither Objects List Nor Sql query is given to report maker.");
+        }
+
 
         String xmlRoot = "<"+ rootElementName +"  ::sumAttr >" + this.newLine ;
 

@@ -53,6 +53,8 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
     implementation 'org.xhtmlrenderer:flying-saucer-pdf:9.1.22'
     implementation  'org.jsoup:jsoup:1.14.2'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.0.1'
+
 
 
 }

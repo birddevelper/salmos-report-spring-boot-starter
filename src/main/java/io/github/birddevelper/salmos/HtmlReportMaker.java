@@ -48,6 +48,23 @@ public class HtmlReportMaker extends ReportMaker {
 
 
 
+    public HtmlReportMaker(ObjectFactory objectFactory) {
+        summaryColumns = new HashMap<String, SummaryType>();
+        this.objectFactory = objectFactory;
+        this.rowIndexVisible = false;
+        this.tableCssClass = "";
+        this.rightToLeft = false;
+        this.oddRowCssClass = "";
+        this.evenRowCssClass = "";
+        this.titleBarCssClass = "";
+        this.headerRowCssClass = "";
+        this.rowIndexHeader = "";
+        this.footerRowCssClass = "";
+        this.title="";
+        this.summaryCommaSeperatedNumbers = false;
+    }
+
+
     public HtmlReportMaker(DataSource  datasource) {
         summaryColumns = new HashMap<String, SummaryType>();
         jdbcQueryExcuter = new JdbcQueryExcuter(datasource);
@@ -160,9 +177,24 @@ public class HtmlReportMaker extends ReportMaker {
 
 
     private String generateHTML(){
+        List<Map<String,Object>> rows=null;
+
+        if(this.objectFactory!=null){
+                if(objectFactory.getListOfObjects()!=null )
+                    rows = objectFactory.getListOfObjects();
+                else
+                    throw new IllegalArgumentException("Please load objects list in objectFactory before making report");
+        }
+        else if(this.sqlQuery!=null && this.sqlQuery.length()>0) {
+            rows = jdbcQueryExcuter.getResultList(this.sqlQuery);
+        }
+        else {
+            throw new IllegalArgumentException("Neither Objects List Nor Sql query is given to report maker.");
+        }
 
 
-        List<Map<String,Object>> rows =  jdbcQueryExcuter.getResultList(this.sqlQuery);
+
+
         String table="<table dir='"  + (this.rightToLeft ? "rtl" : "ltr" ) + "'  class='"+ this.tableCssClass +"' >";
         boolean gotColumnName = false;
         Integer NumberOfcolumns = 0;
