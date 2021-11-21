@@ -247,6 +247,9 @@ public class ReportService {
         private List<String> skills;
         
     }
+    
+    @AutoWired
+    StudentRepository studentRepository;
 
     public String generateXMLReport() {
 
