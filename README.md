@@ -18,11 +18,11 @@ SalmosReport is a spring boot library that helps make beautiful html table, xml 
 ### Getting started
 
 
-Current Version of the  plugin is 1.2.0
+Current Version of the  plugin is 2.0.0
 
 Gradle :
 ```shell
-implementation 'io.github.birddevelper:salmos-report-spring-boot-starter:1.2.0'
+implementation 'io.github.birddevelper:salmos-report-spring-boot-starter:2.0.0'
 ```
 
 
@@ -31,7 +31,7 @@ Maven :
 <dependency>
   <groupId>io.github.birddevelper</groupId>
   <artifactId>salmos-report-spring-boot-starter</artifactId>
-  <version>1.2.0</version>
+  <version>2.0.0</version>
 </dependency>
 ```
 
@@ -224,11 +224,71 @@ public class ReportService {
 }
 ```
 
+
+
+
+#### Generate from list of objects ( for example : hibernate output )
+
+```java
+import io.github.birddevelper.salmos.XmlReportMaker;
+import io.github.birddevelper.salmos.setting.SummaryType;
+import io.github.birddevelper.salmos.setting.XmlReportElementType;
+import lombok.Getter;
+import lombok.Setter;
+@Service
+public class ReportService {
+
+    @Getter
+    @Setter
+    public class Student {
+        private String name;
+        private int age;
+        private Date birthDate;
+        private List<String> skills;
+        
+    }
+
+    public String generateXMLReport() {
+
+        
+        List<Student> studentList = studentRepository.findAll();
+
+        
+        // Mapping the class fields to report columns (here we want only name and age, the reset of entity fields will be ignored)
+        Map<String,String> fieldMap = new HashMap<>();
+        fieldMap.put("name", "Full Name");
+        fieldMap.put("age", "Age");
+        
+        // buidling instance of ObjectFactory class
+        ObjectFactory objectFactory = new ObjectFactory();
+        
+        // setting mapping fields
+        objectFactory.setReportFields(fieldMap);
+        // setting entity lists
+        objectFactory.loadObjects(studentList);
+        
+        // building instance of HtmlReportMaker with ObjectFactory as input parameter
+        HtmlReportMaker htmlReportMaker = new HtmlReportMaker(objectFactory);
+        
+        // generate report
+        return htmlReportMaker.generate();
+    }
+}
+```
+
+
+
+
+
+
 [Read More at Medium.com ](https://medium.com/javarevisited/with-salmos-report-in-spring-boot-generate-reports-in-few-lines-of-code-b5212486b921)
 
 
 
 ### Change Logs :
+
+2.0.0 :
+- Generate reports from list of objects (for example: list of entities retrieved by hibernate)
 
 1.2.0 :
 - Export to PDF and TEXT files added. 
