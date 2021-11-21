@@ -251,7 +251,7 @@ public class ReportService {
     @AutoWired
     StudentRepository studentRepository;
 
-    public String generateXMLReport() {
+    public String generateHTMLReport() {
 
         
         List<Student> studentList = studentRepository.findAll();
