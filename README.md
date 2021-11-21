@@ -18,7 +18,7 @@ SalmosReport is a spring boot library that helps make beautiful html table, xml 
 ### Getting started
 
 
-Current Version of the this plugin is 1.2.0
+Current Version of the  plugin is 1.2.0
 
 Gradle :
 ```shell
