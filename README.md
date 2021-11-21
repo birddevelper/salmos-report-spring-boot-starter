@@ -2,7 +2,18 @@ What is SalmosReport
 ======
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.birddevelper/salmos-report-spring-boot-starter.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22io.github.birddevelper%22%20AND%20a:%22salmos-report-spring-boot-starter%22)
 
-SalmosReport is a spring boot library that helps you turn your SQL query result into a beautiful html table, xml document or any other format you wish with very specific features. Until now, it can produce Html, xml and custom format report .
+SalmosReport is a spring boot library that helps make beautiful html table, xml document, pdf document or any other format you wish from SQL query or Arrays and Lists. Until now, it can produce Html, xml, pdf document and custom format report .
+
+### Features
+
+* Read data from List of Objects and Entities
+* Read data from database by sql query
+* Generate HTML Report
+* Generate XML document
+* Generate PDF document
+* Generate custom structure report
+* Generate TEXT file from report
+* Css Classes for HTML report
 
 ### Getting started
 
