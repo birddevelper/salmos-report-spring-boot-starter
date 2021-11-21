@@ -303,6 +303,8 @@ public class ReportService {
 
 1.0.0 : 
 - First release.
+- Generate Reports from Sql Query
+- Generate HTML and XML reports
 
 
 
