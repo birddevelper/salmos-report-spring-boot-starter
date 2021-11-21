@@ -19,6 +19,7 @@ public class HtmlReportMakerTest {
 
     @Test
     public void generateHtmlFromListOfObjectTest(){
+
         List<Student> studentList = new ArrayList<>();
         for(int i=1; i<3;i++) {
             Student student = new Student();
