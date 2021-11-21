@@ -8,7 +8,7 @@ plugins {
 
 
 group 'io.github.io.github.birddevelper'
-version '1.2.0'
+version '2.0.0'
 
 
 
@@ -53,7 +53,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
     implementation 'org.xhtmlrenderer:flying-saucer-pdf:9.1.22'
     implementation  'org.jsoup:jsoup:1.14.2'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.0.1'
+    shadow 'com.fasterxml.jackson.core:jackson-databind:2.0.1'
 
 
 
