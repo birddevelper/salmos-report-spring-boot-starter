@@ -36,13 +36,21 @@ import java.util.*;
 public class HtmlReportMaker extends ReportMaker {
 
     boolean rowIndexVisible;
-    String tableCssClass;
     boolean rightToLeft;
     String oddRowCssClass;
     String evenRowCssClass;
     String titleBarCssClass;
     String headerRowCssClass;
     String footerRowCssClass;
+    String tableCssClass;
+
+    String oddRowCssStyle;
+    String evenRowCssStyle;
+    String titleBarCssStyle;
+    String headerRowCssStyle;
+    String footerRowCssStyle;
+    String tableCssStyle;
+
     String title;
     String rowIndexHeader;
 
@@ -52,14 +60,20 @@ public class HtmlReportMaker extends ReportMaker {
         summaryColumns = new HashMap<String, SummaryType>();
         this.objectFactory = objectFactory;
         this.rowIndexVisible = false;
-        this.tableCssClass = "";
         this.rightToLeft = false;
+        this.tableCssClass = "";
         this.oddRowCssClass = "";
         this.evenRowCssClass = "";
         this.titleBarCssClass = "";
         this.headerRowCssClass = "";
-        this.rowIndexHeader = "";
         this.footerRowCssClass = "";
+        this.tableCssStyle = "";
+        this.oddRowCssStyle = "";
+        this.evenRowCssStyle = "";
+        this.titleBarCssStyle = "";
+        this.headerRowCssStyle = "";
+        this.footerRowCssStyle = "";
+        this.rowIndexHeader = "";
         this.title="";
         this.summaryCommaSeperatedNumbers = false;
     }
@@ -69,14 +83,23 @@ public class HtmlReportMaker extends ReportMaker {
         summaryColumns = new HashMap<String, SummaryType>();
         jdbcQueryExcuter = new JdbcQueryExcuter(datasource);
         this.rowIndexVisible = false;
-        this.tableCssClass = "";
         this.rightToLeft = false;
+        this.tableCssClass = "";
         this.oddRowCssClass = "";
         this.evenRowCssClass = "";
         this.titleBarCssClass = "";
         this.headerRowCssClass = "";
         this.rowIndexHeader = "";
         this.footerRowCssClass = "";
+        this.tableCssStyle = "";
+        this.oddRowCssStyle = "";
+        this.evenRowCssStyle = "";
+        this.titleBarCssStyle = "";
+        this.headerRowCssStyle = "";
+        this.footerRowCssStyle = "";
+
+
+
         this.title="";
         this.summaryCommaSeperatedNumbers = false;
     }
@@ -91,6 +114,16 @@ public class HtmlReportMaker extends ReportMaker {
         this.headerRowCssClass = template.getHeaderRowCssClass();
         this.rowIndexHeader = template.getRowIndexHeader();
         this.footerRowCssClass = template.getFooterRowCssClass();
+
+        // setting embedded style attribute
+        this.tableCssStyle = template.getTableCssStyle();
+        this.oddRowCssStyle = template.getOddRowCssStyle();
+        this.evenRowCssStyle = template.getEvenRowCssStyle();
+        this.titleBarCssStyle = template.getTitleBarCssStyle();
+        this.headerRowCssStyle = template.getHeaderRowCssStyle();
+        this.footerRowCssStyle = template.getFooterRowCssStyle();
+
+
     }
 
 
@@ -195,10 +228,10 @@ public class HtmlReportMaker extends ReportMaker {
 
 
 
-        String table="<table dir='"  + (this.rightToLeft ? "rtl" : "ltr" ) + "'  class='"+ this.tableCssClass +"' >";
+        String table="<table dir='"  + (this.rightToLeft ? "rtl" : "ltr" ) + "'  class='"+ this.tableCssClass +"'   style=\""+ this.tableCssStyle + "\">";
         boolean gotColumnName = false;
         Integer NumberOfcolumns = 0;
-        String headerofTable = (!this.title.equals("") ? "<tr><th colspan= ::colspan class='" + this.titleBarCssClass + "' > " + this.title + " </th></tr>" : "") + "<tr class='"+ this.headerRowCssClass + "'>" +   (this.rowIndexVisible ? "<th>" + this.rowIndexHeader + " </th>" : "" );
+        String headerofTable = (!this.title.equals("") ? "<tr><th colspan= ::colspan class='" + this.titleBarCssClass + "'  style=\"" + this.titleBarCssStyle + "\"  > " + this.title + " </th></tr>" : "") + "<tr class='"+ this.headerRowCssClass + "'  style=\""+ this.headerRowCssStyle+ "\" >" +   (this.rowIndexVisible ? "<th>" + this.rowIndexHeader + " </th>" : "" );
         String bodyOfTable = "";
         String footerOfTable = "";
         String[] columnsNames = null;
@@ -237,7 +270,7 @@ public class HtmlReportMaker extends ReportMaker {
             }
 
             /// Getting data and making row
-            String singleRow ="<tr class='" + (Index % 2 == 0 ? this.evenRowCssClass : this.oddRowCssClass)  + "'>" + (this.rowIndexVisible ? "<td>"+ String.valueOf(Index) + "</td>": "");
+            String singleRow ="<tr class='" + (Index % 2 == 0 ? this.evenRowCssClass : this.oddRowCssClass)  + "'  style=\"" + (Index % 2 == 0 ? this.evenRowCssStyle : this.oddRowCssStyle)  + "\"   >" + (this.rowIndexVisible ? "<td>"+ String.valueOf(Index) + "</td>": "");
 
             for(int i=0; i< NumberOfcolumns; i++ ){
 
@@ -283,7 +316,7 @@ public class HtmlReportMaker extends ReportMaker {
 
 
         if(this.summaryColumns.size()>0) {
-            footerOfTable = "<tr class='"+ this.footerRowCssClass +"' >"+   (this.rowIndexVisible ? "<td> </td>" : "" );
+            footerOfTable = "<tr class='"+ this.footerRowCssClass +"'  style=\""+ this.footerRowCssStyle +"\"  >"+   (this.rowIndexVisible ? "<td> </td>" : "" );
             for (String column : columnsNames) {
                 if(summaryValue.containsKey(column))
                     footerOfTable += "<th>" + roundOff( summaryValue.get(column), this.summaryDecimalPrecision, this.summaryCommaSeperatedNumbers  ) + "</th>";
