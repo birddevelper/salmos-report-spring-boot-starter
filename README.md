@@ -17,6 +17,7 @@ SalmosReport is a spring boot library that helps make beautiful html table, xml 
 * Generate custom structure report
 * Generate TEXT file from report
 * Css Classes for HTML report
+* Embedded Css Style for HTML report
 
 ### Getting started
 
