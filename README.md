@@ -22,11 +22,11 @@ SalmosReport is a spring boot library that helps make beautiful html table, xml 
 ### Getting started
 
 
-Current Version of the  plugin is 2.0.0
+Current Version of the  plugin is 2.1.0
 
 Gradle :
 ```shell
-implementation 'io.github.birddevelper:salmos-report-spring-boot-starter:2.0.0'
+implementation 'io.github.birddevelper:salmos-report-spring-boot-starter:2.1.0'
 ```
 
 
@@ -35,7 +35,7 @@ Maven :
 <dependency>
   <groupId>io.github.birddevelper</groupId>
   <artifactId>salmos-report-spring-boot-starter</artifactId>
-  <version>2.0.0</version>
+  <version>2.1.0</version>
 </dependency>
 ```
 
