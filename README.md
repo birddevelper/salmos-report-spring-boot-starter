@@ -294,6 +294,9 @@ public class ReportService {
 
 ### Change Logs :
 
+2.1.0 :
+- Embedded css style attribute for HTML report
+
 2.0.0 :
 - Generate reports from list of objects (for example: list of entities retrieved by hibernate)
 
