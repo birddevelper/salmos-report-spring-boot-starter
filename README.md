@@ -11,6 +11,7 @@ SalmosReport is a spring boot library that helps make beautiful html table, xml 
 
 * Read data from List of Objects and Entities
 * Read data from database by sql query
+* Aggregation functions (Sum, Average, Count)
 * Generate HTML Report
 * Generate XML document
 * Generate PDF document
