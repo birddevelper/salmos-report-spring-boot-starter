@@ -180,6 +180,7 @@ public class HtmlReportMaker extends ReportMaker {
 
     }
 
+
     public File generatePDF(String filePathName,String[] fonts, String baseUri) throws IOException {
         Document doc = Jsoup.parse(generateHTML(),baseUri);
         doc.outputSettings().syntax(Document.OutputSettings.Syntax.html);
@@ -216,12 +217,15 @@ public class HtmlReportMaker extends ReportMaker {
                 if(objectFactory.getListOfObjects()!=null )
                     rows = objectFactory.getListOfObjects();
                 else
+                    //Throw exception if object factory is passed to generator and object list is not loaded.
                     throw new IllegalArgumentException("Please load objects list in objectFactory before making report");
         }
         else if(this.sqlQuery!=null && this.sqlQuery.length()>0) {
+            //working with query
             rows = jdbcQueryExcuter.getResultList(this.sqlQuery);
         }
         else {
+            //if neither Objects List Nor Sql query is given to report generator, Throw exception
             throw new IllegalArgumentException("Neither Objects List Nor Sql query is given to report maker.");
         }
 
