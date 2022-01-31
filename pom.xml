@@ -7,7 +7,7 @@
     <version>2.1.0</version>
     <name>Salmos Report</name>
     <description>
-        SalmosReport is a spring boot library that helps make beautiful html table, xml document, pdf document or any other format you wish from SQL query or Arrays and Lists. Until now, it can produce Html, xml, pdf document and custom format report .
+        Salmos Report is a spring boot library that helps make beautiful html table, xml document, pdf document or any other format you wish from SQL query or Arrays and Lists. Until now, it can produce Html, xml, pdf document and custom format report .
     </description>
     <url>https://github.com/birddevelper/salmos-report-spring-boot-starter</url>
     <licenses>
