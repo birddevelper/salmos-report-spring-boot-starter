@@ -44,9 +44,9 @@ Maven :
 
 There exist 3 classes in this plugin to make amazing things for you.
 
-* HtmlReportMaker : A class that generates HTML table from records retrieved by given sql query.
-* XmlReportMaker : A class that generates XML document from records retrieved by given sql query.
-* GeneralReportMaker : This class generates output in any given structure and format.
+* HtmlReportMaker : A class that generates HTML table from records retrieved from sql query or from list of objects.
+* XmlReportMaker : A class that generates XML document from records retrieved from sql query or from list of objects.
+* GeneralReportMaker : This class generates output in any given structure and format from sql query or list of objects.
 
 #### HtmlReportMaker Sample code
 
