@@ -295,6 +295,9 @@ public class ReportService {
 
 ### Change Logs :
 
+2.1.1 :
+- Maven modelVersion changed to 4.0.0
+
 2.1.0 :
 - Embedded css style attribute for HTML report
 
