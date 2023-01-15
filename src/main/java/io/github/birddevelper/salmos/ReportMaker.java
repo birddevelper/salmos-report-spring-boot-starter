@@ -17,6 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Getter
 @Setter
+@Accessors(fluent = false, chain = true)
 public abstract class ReportMaker {
 
     protected boolean summaryCommaSeperatedNumbers = false;

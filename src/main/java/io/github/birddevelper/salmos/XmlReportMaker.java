@@ -19,6 +19,7 @@ import java.util.*;
 @Getter
 @Setter
 @Configurable
+@Accessors(fluent = false, chain = true)
 public class XmlReportMaker extends ReportMaker{
 
 

@@ -22,6 +22,7 @@ import java.util.*;
 
 @Getter
 @Setter
+@Accessors(fluent = false, chain = true)
 /**
  *  A class that makes HTML table from records retrieved by given sql query.
  *
