@@ -7,6 +7,8 @@ import java.util.List;
 
 @Getter
 @Setter
+@Accessors(fluent = false, chain = true)
+@Builder
 public class HtmlReportTemplate {
 
     public HtmlReportTemplate() {
