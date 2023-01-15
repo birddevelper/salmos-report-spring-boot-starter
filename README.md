@@ -297,6 +297,7 @@ public class ReportService {
 
 2.1.1 :
 - Maven modelVersion changed to 4.0.0
+- builder pattern
 
 2.1.0 :
 - Embedded css style attribute for HTML report
