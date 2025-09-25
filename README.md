@@ -288,11 +288,6 @@ public class ReportService {
 
 
 
-
-[Read More at Medium.com ](https://medium.com/javarevisited/with-salmos-report-in-spring-boot-generate-reports-in-few-lines-of-code-b5212486b921)
-
-
-
 ### Change Logs :
 
 2.1.1 :
@@ -320,4 +315,4 @@ public class ReportService {
 
 
 
-[Salmos report](https://m-shaeri.ir/blog/with-salmos-report-generate-reports-in-any-format-you-need/)
+[Salmos report](https://mshaeri.com/blog/with-salmos-report-generate-reports-in-any-format-you-need/)
