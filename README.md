@@ -314,5 +314,3 @@ public class ReportService {
 - Generate HTML and XML reports
 
 
-
-[Salmos report](https://mshaeri.com/blog/with-salmos-report-generate-reports-in-any-format-you-need/)
